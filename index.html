@@ -10,6 +10,10 @@
             --brand-gold: #b58e3e;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -18,19 +22,21 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             background-color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             overflow-x: hidden;
             color: var(--brand-dark);
+            text-align: center;
         }
 
         /* 1. Logo Section (Responsive scaling) */
         .logo-section {
-            width: 80%;
-            max-width: 280px;
+            width: 85%;
+            max-width: clamp(180px, 60vw, 280px);
             height: auto;
-            margin-bottom: 2vh;
+            margin: 0 auto 2vh auto;
+            display: block;
         }
 
         .logo-path {
@@ -72,62 +78,58 @@
 
         /* 2. Message Section */
         .message-section {
+            width: 100%;
             text-align: center;
-            margin-bottom: 5vh;
             opacity: 0;
+            padding: 0 20px;
+            margin: 0 auto 5vh auto;
             animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
         }
 
         .message-section h1 {
-            font-size: clamp(24px, 5vw, 36px);
+            font-size: clamp(20px, 6vw, 36px);
             font-weight: 900;
             margin: 0;
-            letter-spacing: 5px;
+            letter-spacing: clamp(2px, 1vw, 5px);
             text-transform: uppercase;
         }
 
         .message-section p {
-            font-size: clamp(14px, 3vw, 18px);
+            font-size: clamp(12px, 3.5vw, 18px);
             font-weight: 500;
-            margin-top: 10px;
-            letter-spacing: 2px;
+            margin-top: 8px;
+            letter-spacing: 1px;
             opacity: 0.8;
         }
 
-        /* 3. Verticals Section (No restrictions, no gold lines) */
+        /* 3. Verticals Section (Clean Text Only) */
         .verticals-row {
-            width: 100vw;
             display: flex;
-            flex-wrap: wrap; /* Wraps on very small screens */
             justify-content: center;
-            align-items: center;
-            gap: 40px; /* Natural spacing instead of separators */
-            padding: 20px;
-        }
-
-        .vertical-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: clamp(15px, 4vw, 40px);
+            width: 100%;
+            max-width: 800px;
+            margin: 3vh auto 0 auto;
+            padding: 0 20px;
             opacity: 0;
             animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-            min-width: 120px;
-        }
-
-        .sub-icon {
-            width: clamp(40px, 8vw, 50px);
-            height: clamp(40px, 8vw, 50px);
-            margin-bottom: 12px;
-            fill: var(--brand-dark);
         }
 
         .sub-label {
-            color: var(--brand-dark);
-            font-size: clamp(10px, 2vw, 13px);
-            font-weight: 900;
+            font-size: clamp(10px, 3vw, 15px);
+            font-weight: 800;
             letter-spacing: 2px;
-            text-align: center;
             text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Responsive "Two-Line" logic for non-desktop */
+        @media (max-width: 1024px) {
+            .verticals-row {
+                max-width: 400px; /* Adjusted to ensure clean wrapping */
+                gap: 15px 30px;
+            }
         }
 
         @keyframes syncBuild {
@@ -144,16 +146,6 @@
             45% { opacity: 1; transform: translateY(0); }
             85% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; }
-        }
-
-        /* Mobile specific adjustments */
-        @media (max-width: 600px) {
-            .verticals-row {
-                gap: 25px;
-            }
-            .message-section h1 {
-                letter-spacing: 2px;
-            }
         }
     </style>
 </head>
@@ -179,33 +171,11 @@
         <p>Building Excellence for the Future</p>
     </div>
 
-    <!-- Responsive Brand Pillars (No Gold Lines) -->
+    <!-- Minimalist Brand Verticals (Text Only) -->
     <div class="verticals-row">
-        
-        <div class="vertical-item">
-            <!-- Compass Drafting (Engineering) -->
-            <svg class="sub-icon" viewBox="0 0 512 512">
-                <path d="M495.2 96l-78.1 78.1 40 40c10 10 10 26.2 0 36.2s-26.2 10-36.2 0l-40-40L256 335.5 131.1 210.6l-40-40c-10-10-10-26.2 0-36.2s26.2-10 36.2 0l40 40 78.1-78.1c-16.7-31.5-12.8-71.1 11.7-98.7L256.4 0l-15.6 15.6C216.3 40.2 212.4 80 229.2 111.4l-78.1 78.1-40-40c-10-10-10-26.2 0-36.2s26.2-10 36.2 0l40 40L311.4 33.3c-27.5-24.5-67.1-28.5-98.7-11.7L33.3 211.4c-16.7 31.5-12.8 71.1 11.7 98.7L189.9 455l-15.6 15.6c-24.6 24.6-24.6 64.5 0 89.1s64.5 24.6 89.1 0l15.6-15.6 15.6 15.6c24.6 24.6 64.5 24.6 89.1 0s24.6-64.5 0-89.1L338.1 455 467 326.1c24.6-24.6 28.5-64.2 11.7-98.7L495.2 96zM256 392L144 280l112-112 112 112L256 392z"/>
-            </svg>
-            <div class="sub-label">ENGINEERING</div>
-        </div>
-
-        <div class="vertical-item">
-            <!-- Crane (Construction) -->
-            <svg class="sub-icon" viewBox="0 0 512 512">
-                <path d="M496 128H288V32c0-17.7-14.3-32-32-32s-32 14.3-32 32v96H16c-8.8 0-16 7.2-16 16s7.2 16 16 16h8.7L96 480c0 17.7 14.3 32 32 32h256c17.7 0 32-14.3 32-32l71.3-320h8.7c8.8 0 16-7.2 16-16s-7.2-16-16-16zM352 480H160L96.2 160h319.6L352 480zM256 160c-17.7 0-32 14.3-32 32v160c0 17.7 14.3 32 32 32s32-14.3 32-32V192c0-17.7-14.3-32-32-32z"/>
-            </svg>
-            <div class="sub-label">CONSTRUCTION</div>
-        </div>
-
-        <div class="vertical-item">
-            <!-- Bridge (Infrastructure) -->
-            <svg class="sub-icon" viewBox="0 0 640 512">
-                <path d="M64 128c17.7 0 32 14.3 32 32v64h448v-64c0-17.7 14.3-32 32-32s32 14.3 32 32v288c0 17.7-14.3 32-32 32s-32-14.3-32-32v-32H96v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm448 160H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h384c17.7 0 32-14.3 32-32s-14.3-32-32-32z"/>
-            </svg>
-            <div class="sub-label">INFRASTRUCTURE</div>
-        </div>
-
+        <div class="sub-label">ENGINEERING</div>
+        <div class="sub-label">CONSTRUCTION</div>
+        <div class="sub-label">INFRASTRUCTURE</div>
     </div>
 
 </body>
