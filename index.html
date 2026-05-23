@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISRUTI INFRA - Final Polish</title>
+    <title>VISRUTI INFRA | Under Construction</title>
     <style>
+        :root {
+            --brand-dark: #061934;
+            --brand-gold: #b58e3e;
+        }
+
         body {
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: transparent;
+            min-height: 100vh;
+            width: 100vw;
+            background-color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            color: var(--brand-dark);
         }
 
-        .loader-container {
-            width: 250px; /* Professional component size */
+        /* 1. Logo Section (Responsive scaling) */
+        .logo-section {
+            width: 80%;
+            max-width: 280px;
             height: auto;
-            aspect-ratio: 6 / 9;
+            margin-bottom: 2vh;
         }
 
         .logo-path {
             fill: none;
-            stroke: #061934;
+            stroke: var(--brand-dark);
             stroke-width: 15;
             stroke-linecap: round;
-            stroke-linejoin: miter;
+            stroke-linejoin: round;
             stroke-dasharray: 4500;
             stroke-dashoffset: 4500;
             animation: syncBuild 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
@@ -35,15 +46,15 @@
 
         .brand-line {
             fill: none;
-            stroke: #061934;
-            stroke-width: 6; /* Thinner for cleaner look */
+            stroke: var(--brand-dark);
+            stroke-width: 6;
             stroke-linecap: butt;
             opacity: 0;
             animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
         }
 
         .brand-name {
-            fill: #061934;
+            fill: var(--brand-dark);
             font-size: 110px;
             font-weight: 900;
             opacity: 0;
@@ -51,12 +62,72 @@
         }
 
         .subtitle {
-            fill: #061934;
+            fill: var(--brand-dark);
             font-size: 88px;
             font-weight: 900;
             text-anchor: middle;
             opacity: 0;
             animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+
+        /* 2. Message Section */
+        .message-section {
+            text-align: center;
+            margin-bottom: 5vh;
+            opacity: 0;
+            animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+
+        .message-section h1 {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .message-section p {
+            font-size: clamp(14px, 3vw, 18px);
+            font-weight: 500;
+            margin-top: 10px;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        /* 3. Verticals Section (No restrictions, no gold lines) */
+        .verticals-row {
+            width: 100vw;
+            display: flex;
+            flex-wrap: wrap; /* Wraps on very small screens */
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Natural spacing instead of separators */
+            padding: 20px;
+        }
+
+        .vertical-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: syncFade 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+            min-width: 120px;
+        }
+
+        .sub-icon {
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            margin-bottom: 12px;
+            fill: var(--brand-dark);
+        }
+
+        .sub-label {
+            color: var(--brand-dark);
+            font-size: clamp(10px, 2vw, 13px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
         }
 
         @keyframes syncBuild {
@@ -68,39 +139,73 @@
         }
 
         @keyframes syncFade {
-            0% { opacity: 0; transform: translateY(5px); }
+            0% { opacity: 0; transform: translateY(15px); }
             5% { opacity: 0; }
             45% { opacity: 1; transform: translateY(0); }
             85% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; }
         }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 600px) {
+            .verticals-row {
+                gap: 25px;
+            }
+            .message-section h1 {
+                letter-spacing: 2px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="loader-container">
-        <!-- Tightly cropped viewBox: 600 wide, 900 tall -->
-        <svg viewBox="94 100 600 900" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-            <!-- 1. Logo -->
+    <!-- Centerpiece Logo -->
+    <div class="logo-section">
+        <svg viewBox="94 100 600 1000" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
             <path class="logo-path" d="M246,222 L145,222 L246,398 L394,153 L542,398 L643,222 L542,222 L442,417 L482,495 L394,647 L306,495 L346,417 L394,339 L442,417 L394,494 L346,417 L246,222" />
-            
-            <!-- 2. Header Line - Spaced 40px above VISRUTI -->
-            <path class="brand-line" d="M 145,690 L 643,690" />
-
-            <!-- 3. VISRUTI - Baseline 810 -->
-            <text x="145" y="810" class="brand-name" textLength="498" lengthAdjust="spacing">VISRUTI</text>
-
-            <!-- 4. INFRA - Baseline 940 (Mirrored spacing) -->
-            <!-- Left Double Lines -->
-            <path class="brand-line" d="M 145,905 L 230,905" />
-            <path class="brand-line" d="M 145,925 L 230,925" />
-            
-            <text x="394" y="940" class="subtitle">INFRA</text>
-            
-            <!-- Right Double Lines -->
-            <path class="brand-line" d="M 558,905 L 643,905" />
-            <path class="brand-line" d="M 558,925 L 643,925" />
+            <path class="brand-line" d="M 145,700 L 643,700" />
+            <text x="145" y="830" class="brand-name" textLength="498" lengthAdjust="spacing">VISRUTI</text>
+            <path class="brand-line" d="M 145,915 L 230,915" />
+            <path class="brand-line" d="M 145,935 L 230,935" />
+            <text x="394" y="950" class="subtitle">INFRA</text>
+            <path class="brand-line" d="M 558,915 L 643,915" />
+            <path class="brand-line" d="M 558,935 L 643,935" />
         </svg>
+    </div>
+
+    <!-- Status Message -->
+    <div class="message-section">
+        <h1>UNDER CONSTRUCTION</h1>
+        <p>Building Excellence for the Future</p>
+    </div>
+
+    <!-- Responsive Brand Pillars (No Gold Lines) -->
+    <div class="verticals-row">
+        
+        <div class="vertical-item">
+            <!-- Compass Drafting (Engineering) -->
+            <svg class="sub-icon" viewBox="0 0 512 512">
+                <path d="M495.2 96l-78.1 78.1 40 40c10 10 10 26.2 0 36.2s-26.2 10-36.2 0l-40-40L256 335.5 131.1 210.6l-40-40c-10-10-10-26.2 0-36.2s26.2-10 36.2 0l40 40 78.1-78.1c-16.7-31.5-12.8-71.1 11.7-98.7L256.4 0l-15.6 15.6C216.3 40.2 212.4 80 229.2 111.4l-78.1 78.1-40-40c-10-10-10-26.2 0-36.2s26.2-10 36.2 0l40 40L311.4 33.3c-27.5-24.5-67.1-28.5-98.7-11.7L33.3 211.4c-16.7 31.5-12.8 71.1 11.7 98.7L189.9 455l-15.6 15.6c-24.6 24.6-24.6 64.5 0 89.1s64.5 24.6 89.1 0l15.6-15.6 15.6 15.6c24.6 24.6 64.5 24.6 89.1 0s24.6-64.5 0-89.1L338.1 455 467 326.1c24.6-24.6 28.5-64.2 11.7-98.7L495.2 96zM256 392L144 280l112-112 112 112L256 392z"/>
+            </svg>
+            <div class="sub-label">ENGINEERING</div>
+        </div>
+
+        <div class="vertical-item">
+            <!-- Crane (Construction) -->
+            <svg class="sub-icon" viewBox="0 0 512 512">
+                <path d="M496 128H288V32c0-17.7-14.3-32-32-32s-32 14.3-32 32v96H16c-8.8 0-16 7.2-16 16s7.2 16 16 16h8.7L96 480c0 17.7 14.3 32 32 32h256c17.7 0 32-14.3 32-32l71.3-320h8.7c8.8 0 16-7.2 16-16s-7.2-16-16-16zM352 480H160L96.2 160h319.6L352 480zM256 160c-17.7 0-32 14.3-32 32v160c0 17.7 14.3 32 32 32s32-14.3 32-32V192c0-17.7-14.3-32-32-32z"/>
+            </svg>
+            <div class="sub-label">CONSTRUCTION</div>
+        </div>
+
+        <div class="vertical-item">
+            <!-- Bridge (Infrastructure) -->
+            <svg class="sub-icon" viewBox="0 0 640 512">
+                <path d="M64 128c17.7 0 32 14.3 32 32v64h448v-64c0-17.7 14.3-32 32-32s32 14.3 32 32v288c0 17.7-14.3 32-32 32s-32-14.3-32-32v-32H96v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm448 160H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h384c17.7 0 32-14.3 32-32s-14.3-32-32-32z"/>
+            </svg>
+            <div class="sub-label">INFRASTRUCTURE</div>
+        </div>
+
     </div>
 
 </body>
