@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G. Bharathi | Siri Society Director</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-section {
+            padding: 40px 10% 100px 10%;
+            background-color: #ffffff;
+            text-align: left;
+        }
+        .profile-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+        .profile-image-side {
+            flex: 0 0 400px;
+            position: sticky;
+            top: 140px;
+        }
+        .profile-image-side img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 20px 20px 0 var(--brand-dark);
+        }
+        .profile-content-side {
+            flex: 1;
+        }
+        .section-title {
+            text-align: left;
+            margin-left: 0;
+        }
+        .section-title::after {
+            left: 0;
+            transform: none;
+        }
+        .bio-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(6, 25, 52, 0.9);
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .bio-text ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .bio-text ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .bio-text ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--brand-gold);
+            font-weight: bold;
+        }
+        .section-subtitle {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--brand-gold);
+            margin: 40px 0 20px 0;
+            text-transform: uppercase;
+            border-left: 4px solid var(--brand-gold);
+            padding-left: 20px;
+        }
+        .awards-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 60px;
+        }
+        .awards-list li {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .awards-list li::before {
+            content: '🏆';
+            position: absolute;
+            left: 0;
+        }
+        .commitment-box {
+            background-color: var(--brand-dark);
+            color: #ffffff;
+            padding: 60px 10%;
+            text-align: center;
+        }
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+        .commitment-card {
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .commitment-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+            border: 3px solid var(--brand-gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .commitment-card h4 {
+            color: var(--brand-gold);
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .commitment-card p {
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        /* Slideshow Styles for this page */
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 60px;
+            overflow: hidden;
+            background-color: #061934;
+        }
+        .slideshow-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(6, 25, 52, 0.4);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .slideshow-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .slide.active { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .site-header { height: 80px; }
+            .header-logo { height: 50px; }
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: #ffffff;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease;
+                z-index: 1500;
+            }
+            .main-nav.active { right: 0; }
+            .mobile-toggle { display: flex; }
+            .nav-link { font-size: 20px; font-weight: 800; }
+
+            .profile-section {
+                padding: 40px 5% 60px 5%;
+            }
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+            .profile-image-side {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 320px;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .profile-image-side img {
+                box-shadow: 15px 15px 0 var(--brand-dark);
+            }
+            .section-title {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .section-subtitle {
+                border-left: none;
+                border-bottom: 2px solid var(--brand-gold);
+                padding-left: 0;
+                padding-bottom: 10px;
+                display: inline-block;
+                text-align: center;
+                width: auto;
+            }
+            .bio-text {
+                text-align: center;
+                font-size: 16px;
+            }
+            .bio-text ul li {
+                text-align: left;
+            }
+            .commitment-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .slideshow-wrapper {
+                height: 250px;
+            }
+            #society-mission {
+                padding: 60px 5% !important;
+                text-align: center;
+            }
+            #society-mission .commitment-grid {
+                text-align: center !important;
+            }
+            #society-mission .commitment-card {
+                align-items: center !important;
+                text-align: center !important;
+            }
+            #society-mission p {
+                font-size: 16px !important;
+            }
+            .awards-list li {
+                text-align: left;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body class="main-content loaded">
+
+    <header class="site-header" style="opacity: 1; transform: translateY(0);">
+        <a href="index.html?noloader=true" class="header-logo">
+            <svg class="header-logo-svg" viewBox="100 150 2400 500" xmlns="http://www.w3.org/2000/svg">
+                <path class="logo-path" d="M246,222 L145,222 L246,398 L394,153 L542,398 L643,222 L542,222 L442,417 L482,495 L394,647 L306,495 L346,417 L394,339 L442,417 L394,494 L346,417 L246,222" style="stroke-dashoffset: 0; animation: none;" />
+                <text x="700" y="450" class="brand-name" style="font-size: 130px; font-weight: 900; text-anchor: start; opacity: 1; animation: none;">Visruti Infra Projects LLP</text>
+            </svg>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html?noloader=true#about" class="nav-link">About Us</a>
+            <a href="index.html?noloader=true#business" class="nav-link">Our Business</a>
+            <a href="index.html?noloader=true#clients" class="nav-link">Our Clients</a>
+            <a href="bharathi.html" class="nav-link" style="color: var(--brand-gold);">Siri Society</a>
+            <a href="index.html?noloader=true#careers" class="nav-link">Careers</a>
+            <a href="index.html?noloader=true#contact" class="nav-link">Contact Us</a>
+        </nav>
+        <div class="mobile-toggle"><span></span><span></span><span></span></div>
+    </header>
+
+    <main id="main-content" class="main-content loaded">
+        <div class="slideshow-wrapper" id="society">
+            <div class="slideshow-container">
+                <!-- Slides injected by script.js -->
+            </div>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <h2 class="section-title" style="color: #ffffff; margin-bottom: 0; text-align: center;">Siri Society Initiatives</h2>
+                <div style="width: 50px; height: 2px; background-color: var(--brand-gold); margin-top: 15px;"></div>
+            </div>
+        </div>
+
+        <section class="profile-section">
+            <div class="profile-container">
+                <div class="profile-image-side">
+                    <img src="assets/images/bharathi.jpeg" alt="G. Bharathi">
+                    <h2 style="margin-top: 30px; font-weight: 900; letter-spacing: 2px;">G. BHARATHI</h2>
+                    <p style="color: var(--brand-gold); font-weight: 700; letter-spacing: 1px;">DIRECTOR, SIRI SOCIETY</p>
+                </div>
+                <div class="profile-content-side">
+                    <h2 class="section-title" style="text-align: left; margin-left: 0;">DIRECTOR'S PROFILE</h2>
+                    <div class="bio-text">
+                        <p>I have been working for 20+ years with children in various capacities. My journey in social service began with a deep-seated desire to bring about meaningful change in the lives of the underprivileged, particularly children and women in rural environments.</p>
+                        
+                        <h3 class="section-subtitle">Foundations & Early Career</h3>
+                        <p><strong>NGO Leadership (SECURE):</strong> From 2004 to 2012, I worked with SECURE (Socio-economic & cultural upliftment in rural environment), gaining firsthand experience in rural development and social upliftment.</p>
+                        
+                        <p><strong>All India Radio:</strong> I served in the Child and Women programmes department at All India Radio. As an announcer and department member, I had the unique opportunity to interact with children and discuss issues affecting women and families across the region.</p>
+                        
+                        <h3 class="section-subtitle">Alternative Education</h3>
+                        <p>I founded and ran an alternative school for rural children for nine years. This initiative was born from a critical need: there was no government school nearby, and low-income parents could not afford private education. My focus was threefold:</p>
+                        <ul style="">
+                            <li>Addressing the lack of accessible education for rural families.</li>
+                            <li>Implementing alternative education models based on developmental psychology, linking mental and physical health with a foundation of unconditional love and freedom.</li>
+                            <li>Minimizing school dropouts by providing a joyful, pressure-free learning environment.</li>
+                        </ul>
+                        <p>After nine successful years, I initiated efforts to establish a government school in the area. I offered my school premises to the government rent-free and transitioned all my students to the public system to ensure their continued education was free and sustainable. This experience served as deep research into the child's mind—understanding their needs for flowering and holistic development.</p>
+
+                        <h3 class="section-subtitle">Child Welfare & Advocacy (2018 - 2021)</h3>
+                        <p>I served in the Child Welfare Committee (CWC) and eventually as its Chairperson. This role gave me an intimate look at the conditions of orphanages and the complex issues facing the girl child. My school experience proved invaluable, allowing me to build deep trust and rapport with children, making them feel free to share their problems.</p>
+                        
+                        <p style="margin-bottom: 10px;"><strong>CWC Initiatives:</strong></p>
+                        <ul style="">
+                            <li>Interacted with and rehabilitated neglected children, addressing issues like child marriage.</li>
+                            <li>Monitored and trained the Special Juvenile Police Unit (SJPU).</li>
+                            <li>Trained NGOs managing children's homes on the Juvenile Justice Act (JJ-ACT).</li>
+                            <li>Counseled 46 girls who had been sexually abused, creating a deep sense of safety to help them overcome fear and begin healing.</li>
+                        </ul>
+                        <p>This journey has been one of great personal growth, reinforcing my commitment to bringing about change through direct experience and empathetic action.</p>
+
+                        <h3 class="section-subtitle">AWARDS & RECOGNITION</h3>
+                        <ul class="awards-list">
+                            <li>Champion Women Award (08-03-2021)</li>
+                            <li>N.T.R National Award (29-05-2022)</li>
+                            <li>DR. A.P.J Abdul Kalam National Award (22-11-2020)</li>
+                            <li>Saahasa Mahila Award (08-03-2022)</li>
+                            <li>Awarded by APMAS (Andhra Pradesh Mahila Abhudaya Samithi)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="society-mission" class="image-bg" style="background-image: url('assets/images/society.jpg'); padding: 100px 10%;">
+            <div style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;">
+                <h2 class="section-title" style="color: #ffffff; margin-bottom: 20px;">Mission & Impact</h2>
+                <p style="font-style: italic; font-size: 20px; color: rgba(255,255,255,0.9); margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto; text-align: center;">
+                    "Our initiatives and projects are shaped by local needs and long-term commitment rather than short-term outcomes. We strive to deliver the maximum benefit to those who need it most."
+                </p>
+
+                <div style="display: flex; justify-content: center; margin-top: 40px;">
+                    <div class="commitment-card" style="max-width: 800px; width: 100%; align-items: center; text-align: center; padding: 60px 40px;">
+                        <h4 style="color: var(--brand-gold); margin-bottom: 20px;">Our Vision</h4>
+                        <p style="font-style: normal; font-size: 18px; line-height: 1.8;">To make sustainable impact on the human development of under-served communities through targeted initiatives in Education, Health and Livelihoods.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px;">
+                    <h3 style="color: var(--brand-gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Core Areas of Focus</h3>
+                    <div class="focus-grid">
+                        <div class="commitment-card" style="min-height: auto; padding: 25px 15px; text-align: center; justify-content: center; align-items: center;">
+                            <h4 style="font-size: 13px; margin-bottom: 0; letter-spacing: 1px;">EDUCATION</h4>
+                        </div>
+                        <div class="commitment-card" style="min-height: auto; padding: 25px 15px; text-align: center; justify-content: center; align-items: center;">
+                            <h4 style="font-size: 13px; margin-bottom: 0; letter-spacing: 1px;">HEALTH & HYGIENE</h4>
+                        </div>
+                        <div class="commitment-card" style="min-height: auto; padding: 25px 15px; text-align: center; justify-content: center; align-items: center;">
+                            <h4 style="font-size: 13px; margin-bottom: 0; letter-spacing: 1px;">LIVELIHOODS</h4>
+                        </div>
+                        <div class="commitment-card" style="min-height: auto; padding: 25px 15px; text-align: center; justify-content: center; align-items: center;">
+                            <h4 style="font-size: 13px; margin-bottom: 0; letter-spacing: 1px;">COMMUNITY</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="commitment-box">
+            <h2 class="section-title" style="color: #ffffff;">Our Commitment</h2>
+            <p style="max-width: 800px; margin: 0 auto 40px; opacity: 0.8; font-size: 18px;">At Visruti group, we believe that true progress is measured not just by what we build, but by the lives we touch. Our commitment to community, compassion, and sustainability continues to guide every initiative.</p>
+            
+            <div class="commitment-grid">
+                <div class="commitment-card">
+                    <div class="commitment-image" style="background-image: url('assets/images/chairman.jpeg');"></div>
+                    <h4>G. Sudhir Kumar Chowdary</h4>
+                    <p>"I believe that true growth is measured not only by business success but by the positive impact we create in society. Through our CSR initiatives, we are committed to contributing to community development, supporting sustainable practices, and improving the quality of life for the people around us."</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-image" style="background-image: url('assets/images/bharathi.jpeg');"></div>
+                    <h4>G. Bharathi</h4>
+                    <p>"Visruti Group is committed to responsible growth by actively contributing to the well-being of society. Our CSR initiatives focus on sustainable development, community empowerment, and creating long-term value beyond business."</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-image" style="background-image: url('assets/images/director.jpeg');"></div>
+                    <h4>G. Janaki Ram</h4>
+                    <p>"I believe in giving back to society is at the heart of Visruti Infra. We strive to build not just infrastructure, but stronger communities by investing in social welfare, environmental sustainability, and inclusive growth."</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 40px; text-align: center; background-color: #f8f8f8; color: var(--brand-dark); font-size: 14px; letter-spacing: 1px;">
+        &copy; 2024 VISRUTI INFRA PROJECTS LLP. All Rights Reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
